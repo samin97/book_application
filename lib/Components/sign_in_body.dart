@@ -3,11 +3,11 @@ import 'package:flutter_svg/svg.dart';
 import '../Screen/LoginScreen.dart';
 import 'RoundedButton.dart';
 import 'alreadyAccount.dart';
-import 'backgrount.dart';
+import 'background.dart';
 import 'password.dart';
 import 'roundedInputField.dart';
 
-class Body extends StatelessWidget {
+class SignInBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;

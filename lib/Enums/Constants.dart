@@ -8,7 +8,7 @@ class Constants{
 
 
 
-   static SharedPreferences sharedPreferences;
+   static SharedPreferences? sharedPreferences;
 
    // Firebase Collection name
    static String collectionUser = "users";

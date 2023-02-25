@@ -1,4 +1,4 @@
-import 'package:bookapp/Components/body.dart';
+import 'package:bookapp/Components/sign_in_body.dart';
 import 'package:flutter/material.dart';
 
 class SignUpScreen extends StatelessWidget {

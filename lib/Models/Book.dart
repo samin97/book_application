@@ -1,16 +1,16 @@
-import 'package:bookapp/Models/Category.dart';
-import 'package:bookapp/Models/author.dart';
+import '../models/category.dart';
+import 'author.dart';
 
 class Book {
-  String id;
-  String name;
-  Category category;
-  String imagePath;
-  String filePath;
-  String writerName;
-  String shortDescription;
-  String price;
-  Author author;
+  String? id;
+  String? name;
+  Category? category;
+  String? imagePath;
+  String? filePath;
+  String? writerName;
+  String? shortDescription;
+  String? price;
+  Author? author;
 
 // Map<String, dynamic> toJson()=>{
 //   'Id':id,

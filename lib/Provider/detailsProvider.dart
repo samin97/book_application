@@ -1,20 +1,18 @@
 import 'dart:io';
 
-import 'package:bookapp/Components/downloadalert.dart';
-import 'package:bookapp/Database/downloaddb.dart';
-import 'package:bookapp/Enums/Constants.dart';
-import 'package:bookapp/Models/Book.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+import '../Database/download_db.dart';
+import '../Models/Book.dart';
 import '../models/category.dart';
 
 class DetailsProvider extends ChangeNotifier {
   bool loading = true;
-  Book entry;
+  Book? entry;
   var dlDB = DownloadsDB();
 
   bool faved = false;
@@ -57,7 +55,7 @@ class DetailsProvider extends ChangeNotifier {
 
   // check if book has been downloaded before
   checkDownload() async {
-    List downloads = await dlDB.check({'id': entry.id.toString()});
+    List downloads = await dlDB.check({'id': entry!.id.toString()});
     if (downloads.isNotEmpty) {
       //print("download ma xir xa");
       // check if book has been deleted
@@ -80,7 +78,7 @@ class DetailsProvider extends ChangeNotifier {
   }
 
   Future<List> getDownload() async {
-    List c = await dlDB.check({'id': entry.id.toString()});
+    List c = await dlDB.check({'id': entry!.id.toString()});
     return c;
   }
 
@@ -91,7 +89,7 @@ class DetailsProvider extends ChangeNotifier {
   }
 
   removeDownload() async {
-    dlDB.remove(entry.id.toString()).then((v) {
+    dlDB.remove(entry!.id.toString()).then((v) {
       print(v);
       checkDownload();
     });
@@ -109,7 +107,7 @@ class DetailsProvider extends ChangeNotifier {
   }
 
   startDownload(BuildContext context, String url, String filename) async {
-    Directory appDocDir = Platform.isAndroid
+    Directory? appDocDir = Platform.isAndroid
         ? await getExternalStorageDirectory()
         : await getApplicationDocumentsDirectory();
 

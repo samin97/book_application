@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:bookapp/Database/downloaddb.dart';
-import 'package:bookapp/Database/locaterdb.dart';
+import 'package:bookapp/Database/download_db.dart';
+import 'package:bookapp/Database/locater_db.dart';
 import 'package:bookapp/Screen/loadingScreen.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:epub_viewer/epub_viewer.dart';
