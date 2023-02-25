@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'TextFieldContainer.dart';
 
 class RoundedPasswordField extends StatelessWidget {
-  final ValueChanged<String> onChanged;
+  final ValueChanged<String>? onChanged;
   const RoundedPasswordField({
-    Key key,
+    Key? key,
     this.onChanged,
   }) : super(key: key);
 
