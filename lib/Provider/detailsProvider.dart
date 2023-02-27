@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+import '../Components/downloadalert.dart';
 import '../Database/download_db.dart';
 import '../Models/Book.dart';
-import '../models/category.dart';
 
 class DetailsProvider extends ChangeNotifier {
   bool loading = true;
@@ -61,17 +61,17 @@ class DetailsProvider extends ChangeNotifier {
       // check if book has been deleted
       String path = downloads[0]['path'];
       print(path);
-      if(await File(path).exists()){
-        downloaded=true;
-                print("download true");
+      if (await File(path).exists()) {
+        downloaded = true;
+        print("download true");
 
         setDownloaded(true);
-      }else{
+      } else {
         print("exist xaina ayo");
         setDownloaded(false);
       }
     } else {
-            print("download ma kai xaina");
+      print("download ma kai xaina");
 
       setDownloaded(false);
     }
@@ -95,7 +95,8 @@ class DetailsProvider extends ChangeNotifier {
     });
   }
 
-  Future downloadFile(BuildContext context, String url, String filename) async {
+  Future downloadFile(
+      BuildContext context, String? url, String? filename) async {
     PermissionStatus permission = await Permission.storage.status;
 
     if (permission != PermissionStatus.granted) {
@@ -106,55 +107,56 @@ class DetailsProvider extends ChangeNotifier {
     }
   }
 
-  startDownload(BuildContext context, String url, String filename) async {
+  startDownload(BuildContext context, String? url, String? filename) async {
     Directory? appDocDir = Platform.isAndroid
         ? await getExternalStorageDirectory()
         : await getApplicationDocumentsDirectory();
 
-   
-  PermissionStatus permission = await  Permission.storage.status;
+    PermissionStatus permission = await Permission.storage.status;
 
     if (permission == PermissionStatus.granted) {
-    String path = appDocDir.path + '/$filename.epub';
-        final paths= Directory(appDocDir.path);
-if ((await paths.exists())) {
-  } else {
-    paths.create();
-  }
-    print(path);
-    File file = File(path);
-    if (!await file.exists()) {
-      await file.create();
-    } else {
-      await file.delete();
-      await file.create();
-    }
-
-    showDialog(
-      barrierDismissible: false,
-      context: context,
-      builder: (context) => DownloadAlert(
-        url: "http://103.69.126.198:8080/odata/Product/GetDocumentByAuther/"+filename+"?filetype=epub",
-        path: path,
-      ),
-    ).then((v) {
-      // When the download finishes, we then add the book
-      // to our local database
-      if (v != null) {
-        print(entry);
-        addDownload(
-          {
-            'id': entry.id.toString(),
-            'path': path,
-            'image': "http://103.69.126.198:8080"+'${entry.imagePath}',
-            'size': v,
-            'name': entry.name,
-          },
-        );
+      String path = appDocDir!.path + '/$filename.epub';
+      final paths = Directory(appDocDir.path);
+      if ((await paths.exists())) {
+      } else {
+        paths.create();
       }
-    });
- checkDownload();
-  }
+      print(path);
+      File file = File(path);
+      if (!await file.exists()) {
+        await file.create();
+      } else {
+        await file.delete();
+        await file.create();
+      }
+
+      showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (context) => DownloadAlert(
+          url: "http://103.69.126.198:8080/odata/Product/GetDocumentByAuther/" +
+              filename! +
+              "?filetype=epub",
+          path: path,
+        ),
+      ).then((v) {
+        // When the download finishes, we then add the book
+        // to our local database
+        if (v != null) {
+          print(entry);
+          addDownload(
+            {
+              'id': entry!.id.toString(),
+              'path': path,
+              'image': "http://103.69.126.198:8080" + '${entry!.imagePath}',
+              'size': v,
+              'name': entry!.name,
+            },
+          );
+        }
+      });
+      checkDownload();
+    }
   }
 
   void setLoading(value) {

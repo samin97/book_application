@@ -6,7 +6,7 @@ import '../Screen/CartPage.dart';
 
 
 class MyAppBar extends StatelessWidget with PreferredSizeWidget {
-  final PreferredSizeWidget bottom;
+  final PreferredSizeWidget? bottom;
   MyAppBar({this.bottom});
   @override
   Widget build(BuildContext context) {
