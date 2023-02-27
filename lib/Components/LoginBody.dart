@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../Screen/SignInScreen.dart';
-import 'Loginackground.dart';
+import 'login_background.dart';
 import 'RoundedButton.dart';
 import 'alreadyAccount.dart';
 
